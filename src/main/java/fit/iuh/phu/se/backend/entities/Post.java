@@ -15,6 +15,7 @@ import java.util.Set;
 public class Post {
     @Id
     @Column(name = "postId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "authorId")
