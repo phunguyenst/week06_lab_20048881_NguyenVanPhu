@@ -1,4 +1,7 @@
 # www_lab6
+# Projects Jakarta EE Week 6
+- Sinh viên: **Nguyễn Văn Phú**
+# Trang web blog công nghệ
 ## Back End
 - Ánh xạ các entity, `repository` extends `JpaRepository`. <br>
 - `Spring Boot - REST API`.  <br>
