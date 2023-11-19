@@ -11,8 +11,12 @@
 - trang login (bấm submit chuyển sang trang blog)
 ![img_1.png](img_1.png)
 - trang blog (bấm read more để xem post)
-![img_2.png](img_2.png) 
+  + có add blog
+  + đăng xuất
+  + các bài post
+![img_6.png](img_6.png)
 - trang post
-![img_3.png](img_3.png)
-![img_5.png](img_5.png)
-![img_4.png](img_4.png)
+  + chi tiết bài post là những postComment đã comment vào bào post đó
+![img_7.png](img_7.png)
+- thêm post
+![img_8.png](img_8.png)

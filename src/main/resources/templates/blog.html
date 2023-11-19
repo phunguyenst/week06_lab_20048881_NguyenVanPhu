@@ -1,46 +1,123 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Blog</title>
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous">
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
+            font-family: Arial, sans-serif;
+            padding-top: 0;
             background-color: #f8f9fa;
+            margin: 0;
         }
-        .post-table {
-            margin-top: 50px;
+
+        .navbar, .content {
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .post {
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+            margin-bottom: 20px;
+        }
+
+        .post:hover {
+            box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar .nav-link {
+            padding: 10px 20px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        .navbar .nav-link:hover {
+            color: #007bff;
+        }
+
+        .content h1 {
+            margin-top: 0;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .inline {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .pagination li {
+            margin-right: 5px;
+        }
+
+        .pagination li a {
+            padding: 8px 12px;
+            border: 1px solid #007bff;
+            color: #007bff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .pagination li a.active {
+            background-color: #007bff;
+            color: white;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1 class="text-center mb-5">My Blog</h1>
-    <table class="table table-striped table-hover">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Summary</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="post : ${posts}">
-            <td th:text="${post.title}"></td>
-            <td th:text="${post.summary}"></td>
-            <td><a th:href="@{'/post/' + ${post.id}}" class="btn btn-primary">Read more</a></td>
-        </tr>
-        </tbody>
-    </table>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 content">
+            <nav class="navbar navbar-light bg-light">
+                <H1>Welcome Phú</H1>
+                <ul class="nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/createPost}" style="color: #28a745;">Add Post</a>
+                    </li>
+                </ul>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login}" style="color: #dc3545;">Log Out</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <h1 class="font-weight-bold">Blog Công Nghệ Data Science</h1>
+            <div class="row">
+                <div th:each="post : ${postPage.content}" class="col-md-6">
+                    <div class="post">
+                        <h5><a th:href="@{/showpost/{id}(id=${post.id})}" th:text="${'Tiêu đề: ' + post.title}"></a></h5>
+                        <p>Tác giả: <strong th:text="${post.author.lastName + ' ' + post.author.firstName}"></strong></p>
+                        <p th:utext="${'Tóm tắt nội dung: ' + post.getSummary()}"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inline">
+                <ul class="pagination" th:if="${postPage.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+                    <li>
+                        <a th:href="@{/post/blog(size=${postPage.size}, page=${pageNumber})}"
+                           th:text="${pageNumber}"
+                           th:class="${pageNumber==postPage.number + 1} ? 'active'"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
 </div>
 
-
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

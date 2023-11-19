@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Post</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-container">
+        <h1 class="text-center">Add Post</h1>
+
+        <!-- Display any error messages here -->
+        <!-- Adjust the styles or use different classes based on your needs -->
+        <div class="alert alert-danger" id="errorMessage" style="display:none;"></div>
+
+        <form id="addPostForm" method="post" action="/addpost" enctype="multipart/form-data">
+            <!-- Hidden input for authorId -->
+            <input type="hidden" id="authorId" name="authorId" value="${user.id}"> <!-- Assuming user has an 'id' property -->
+
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="content">Content:</label>
+                <textarea class="form-control" id="content" name="content" rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="summary">Summary:</label>
+                <input type="text" class="form-control" id="summary" name="summary">
+            </div>
+
+            <div class="form-group">
+                <label for="published">Published:</label>
+                <input type="checkbox" id="published" name="published" value="true">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Optional: Add your custom JavaScript here if needed -->
+
+</body>
+</html>

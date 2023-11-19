@@ -1,7 +1,9 @@
 package fit.iuh.phu.se.backend.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.Instant;
@@ -12,6 +14,8 @@ import java.util.Set;
 @Table(name = "post")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post {
     @Id
     @Column(name = "postId")
@@ -46,4 +50,18 @@ public class Post {
 
     @OneToMany(mappedBy = "post")
     private Set<PostComment> postComments = new LinkedHashSet<>();
+
+    public Post(User author, Post parent, String title, String metaTitle, String summary, boolean published, Instant createdAt, Instant publishedAt, String content, Set<Post> posts, Set<PostComment> postComments) {
+        this.author = author;
+        this.parent = parent;
+        this.title = title;
+        this.metaTitle = metaTitle;
+        this.summary = summary;
+        this.published = published;
+        this.createdAt = createdAt;
+        this.publishedAt = publishedAt;
+        this.content = content;
+        this.posts = posts;
+        this.postComments = postComments;
+    }
 }

@@ -2,12 +2,45 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${post.title}">Post Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Post and Comments</title>
+    <!-- Add Bootstrap CSS link here -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<h1 th:text="${post.title}">Post Title</h1>
-<p th:text="${post.content}"></p>
-<p>Author: <span th:text="${post.author.firstName}"></span></p>
-<!-- Other post details -->
+
+<div class="container mt-4">
+    <h1 class="font-weight-bold" th:text="${'Tiêu đề: ' + post.title}"></h1>
+    <p>Tác giả: <strong th:text="${post.author.lastName + ' ' + post.author.firstName}"></strong></p>
+    <p th:utext="${'Nội dung: ' + post.content}"></p>
+
+
+    <div th:if="${postCommentList != null and not #lists.isEmpty(postCommentList)}">
+        <h2 class="mt-4">Danh sách Comment</h2>
+        <div th:each="comment : ${postCommentList}">
+            <div class="card mt-3">
+                <div class="card-header bg-info text-white" th:text="${comment.title}"></div>
+                <div class="card-body">
+                    <p class="card-text" th:utext="${'Nội dung: ' + comment.content}"></p>
+                    <p class="card-text">Người đăng: <strong th:text="${comment.user.lastName + ' ' + comment.user.firstName}"></strong></p>
+                    <p class="card-text">Ngày đăng: <span th:text="${comment.createdAt}"></span></p>
+                    <p class="card-text">Đã xuất bản: <span th:text="${comment.published} ? 'Có' : 'Không'"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js links here -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UoTqsFTqC3lH5Qw23GlqD1T3dpo7Znp5cHuHDp83agBEwM1BNZd9STc6XqBnEx8IT"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 </html>
